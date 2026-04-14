@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #1b1b2f, #050505);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,80,120,0.08), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.04), transparent 45%);
+  animation: float 30s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translate(0,0); }
+  to { transform: translate(-50%, -50%); }
+}
+
+.card {
+  backdrop-filter: blur(25px);
+  background: rgba(255,255,255,0.05);
+  padding: 55px 75px;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 0 80px rgba(255,80,120,0.2);
+  z-index: 2;
+  max-width: 420px;
+}
+
+.heart {
+  width: 90px;
+  fill: #ff4f81;
+  margin-bottom: 30px;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 22px;
+  min-height: 60px;
+  line-height: 1.4;
+}
+
+.counter {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 30px;
+}
+
+.counter span {
+  color: #ff7aa2;
+  font-weight: 600;
+}
+
+button {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: white;
+  padding: 12px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cats {
+  margin: 40px auto 0;
+  max-width: 900px;
+}
+
+.cats-svg {
+  width: 100%;
+}
+
+/* СИЛУЭТ КОТОВ */
+#cat-left,
+#cat-right {
+  fill: #ff7aa2;
+}
+
+/* ХВОСТЫ */
+#tail-left,
+#tail-right {
+  fill: none;
+  stroke: #ff7aa2;
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+/* ПОХОДКА */
+#cat-left {
+  animation: walkLeft 4s ease-out forwards;
+}
+
+#cat-right {
+  animation: walkRight 4s ease-out forwards;
+}
+
+@keyframes walkLeft {
+  from { transform: translateX(-220px); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes walkRight {
+  from { transform: translateX(220px); }
+  to   { transform: translateX(0); }
+}
+
+/* ХВОСТЫ → СЕРДЦЕ */
+#tail-left {
+  animation: tailLeftHeart 2s ease-out forwards;
+  animation-delay: 4s;
+}
+
+#tail-right {
+  animation: tailRightHeart 2s ease-out forwards;
+  animation-delay: 4s;
+}
+
+@keyframes tailLeftHeart {
+  to {
+    d: path(
+      "M440 185
+       C520 30 600 30 500 120"
+    );
+  }
+}
+
+@keyframes tailRightHeart {
+  to {
+    d: path(
+      "M560 185
+       C480 30 400 30 500 120"
+    );
+  }
+}
