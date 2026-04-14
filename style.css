@@ -2,90 +2,24 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
 }
 
 body {
   height: 100vh;
-  background: radial-gradient(circle at top, #1b1b2f, #050505);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1b1b2f, #050505);
   overflow: hidden;
-  color: #fff;
+  color: white;
 }
 
 .bg {
   position: absolute;
   width: 200%;
   height: 200%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,80,120,0.08), transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.04), transparent 45%);
-  animation: float 30s linear infinite;
-}
-
-@keyframes float {
-  from { transform: translate(0,0); }
-  to { transform: translate(-50%, -50%); }
-}
-
-.card {
-  backdrop-filter: blur(25px);
-  background: rgba(255,255,255,0.05);
-  padding: 55px 75px;
-  border-radius: 28px;
-  text-align: center;
-  box-shadow: 0 0 80px rgba(255,80,120,0.2);
-  z-index: 2;
-  max-width: 420px;
-}
-
-.heart {
-  width: 90px;
-  fill: #ff4f81;
-  margin-bottom: 30px;
-  animation: pulse 3s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-
-h1 {
-  font-size: 26px;
-  font-weight: 400;
-  margin-bottom: 22px;
-  min-height: 60px;
-  line-height: 1.4;
-}
-
-.counter {
-  font-size: 15px;
-  opacity: 0.85;
-  margin-bottom: 30px;
-}
-
-.counter span {
-  color: #ff7aa2;
-  font-weight: 600;
-}
-
-button {
-  background: rgba(255,255,255,0.08);
-  border: none;
-  color: white;
-  padding: 12px 26px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: rgba(255,255,255,0.15);
-  transform: scale(1.05);
+  background: radial-gradient(circle at 30% 30%, rgba(255,80,120,0.08), transparent 40%);
 }
 
 canvas {
@@ -95,77 +29,116 @@ canvas {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
 }
 
+.card {
+  z-index: 2;
+  text-align: center;
+  padding: 40px 50px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 60px rgba(255,80,120,0.15);
+  max-width: 420px;
+}
+
+.heart {
+  width: 80px;
+  fill: #ff4f81;
+  margin-bottom: 20px;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  min-height: 50px;
+}
+
+.counter {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.counter span {
+  color: #ff7aa2;
+}
+
+/* КОТЫ */
 .cats {
-  margin: 40px auto 0;
-  max-width: 900px;
+  margin-top: 20px;
 }
 
 .cats-svg {
   width: 100%;
 }
 
-/* СИЛУЭТ КОТОВ */
-#cat-left,
-#cat-right {
+#cat-left, #cat-right {
   fill: #ff7aa2;
 }
 
-/* ХВОСТЫ */
-#tail-left,
-#tail-right {
+#tail-left, #tail-right {
   fill: none;
   stroke: #ff7aa2;
-  stroke-width: 12;
+  stroke-width: 10;
   stroke-linecap: round;
 }
 
-/* ПОХОДКА */
-#cat-left {
-  animation: walkLeft 4s ease-out forwards;
+/* движение */
+#cat-left { animation: left 4s forwards ease-out; }
+#cat-right { animation: right 4s forwards ease-out; }
+
+@keyframes left {
+  from { transform: translateX(-200px); }
+  to { transform: translateX(0); }
 }
 
-#cat-right {
-  animation: walkRight 4s ease-out forwards;
+@keyframes right {
+  from { transform: translateX(200px); }
+  to { transform: translateX(0); }
 }
 
-@keyframes walkLeft {
-  from { transform: translateX(-220px); }
-  to   { transform: translateX(0); }
-}
-
-@keyframes walkRight {
-  from { transform: translateX(220px); }
-  to   { transform: translateX(0); }
-}
-
-/* ХВОСТЫ → СЕРДЦЕ */
+/* хвосты в сердце */
 #tail-left {
-  animation: tailLeftHeart 2s ease-out forwards;
+  animation: tailL 2s forwards ease-out;
   animation-delay: 4s;
 }
 
 #tail-right {
-  animation: tailRightHeart 2s ease-out forwards;
+  animation: tailR 2s forwards ease-out;
   animation-delay: 4s;
 }
 
-@keyframes tailLeftHeart {
+@keyframes tailL {
   to {
-    d: path(
-      "M440 185
-       C520 30 600 30 500 120"
-    );
+    d: path("M440 185 C520 30 600 30 500 120");
   }
 }
 
-@keyframes tailRightHeart {
+@keyframes tailR {
   to {
-    d: path(
-      "M560 185
-       C480 30 400 30 500 120"
-    );
+    d: path("M560 185 C480 30 400 30 500 120");
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+
+  .heart {
+    width: 60px;
   }
 }
