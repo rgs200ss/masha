@@ -1,31 +1,32 @@
-// ПУЛЬС СИСТЕМЫ
-const pulseEl = document.getElementById("pulse");
+// ТЕКСТ
+const phrases = [
+  "Маша, с того дня многое встало на свои места.",
+  "Маша, с тобой время ощущается иначе.",
+  "Маша, рядом с тобой всё проще.",
+  "Маша, ты стала частью моего дня.",
+  "Маша, с тобой спокойно.",
+  "Маша, рядом с тобой легко быть собой."
+];
 
-// КИБЕР-ШУМ
-const noiseEl = document.getElementById("noise");
+const textEl = document.getElementById("text");
 
-let state = false;
+let i = 0;
+let p = 0;
 
-const chars = ["@", "#", "$", "%", "&", "*", "0", "1", "x", "+"];
+function type() {
+  if (i < phrases[p].length) {
+    textEl.innerHTML += phrases[p][i];
+    i++;
+    setTimeout(type, 50);
+  } else {
+    setTimeout(() => {
+      textEl.innerHTML = "";
+      i = 0;
+      p = (p + 1) % phrases.length;
+      type();
+    }, 2000);
 
-function generateNoise() {
-  let str = "";
-  for (let i = 0; i < 10; i++) {
-    str += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return str;
-}
-
-// пульс (сердцебиение)
-setInterval(() => {
-  state = !state;
-  pulseEl.innerText = state ? "●" : "○";
-}, 600);
-
-// шум системы
-setInterval(() => {
-  noiseEl.innerText = generateNoise();
-}, 120);
+type();
 
 // ДНИ
 const start = new Date("2026-02-14");
